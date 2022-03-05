@@ -1,6 +1,7 @@
 
 from general_node import GeneralNode
 
+
 def create_general_tree(depth=5, width=2, sparsity=0.5, reverse=False):
     root = GeneralNode(1)
     for n in range(1, width + 1):

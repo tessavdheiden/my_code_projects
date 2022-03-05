@@ -19,23 +19,24 @@ class GeneralNode(Node):
             next_nodes = []
 
             for node in current_nodes:
-              for child in node.children:
-                if child is not None:
-                  next_nodes.append(child)
+                for child in node.children:
+                    if child is not None:
+                        next_nodes.append(child)
 
             levels.append(current_nodes)
             current_nodes = next_nodes
 
         return levels
-    def pprint(self, index: bool = False, delimiter: str = "-") -> None:
-      tree = []
 
-      for level in self.levels[::-1]:
-        generation = []
-        for node in level:
-          generation.append(node.val)
-        tree.append(generation)
-      pretty_print(tree, n_children=len(self.children))
+    def pprint(self, index: bool = False, delimiter: str = "-") -> None:
+        tree = []
+
+        for level in self.levels[::-1]:
+            generation = []
+            for node in level:
+                generation.append(node.val)
+            tree.append(generation)
+        pretty_print(tree, n_children=len(self.children))
 
 
 def create_pipes_from_numbers_in_line(line):
@@ -50,9 +51,18 @@ def create_pipes_from_numbers_in_line(line):
 def replace_underscores_between_pipes(line, n_children):
     matches = re.finditer(r'\|', line)
     spans = [match.span() for match in matches]
-    spans_between_pipes = [(t1[1], t2[0]) for t1, t2 in zip(spans[:-1], spans[1:])]
-    are_children = [True if i % n_children != (n_children - 1) else False for i in range(len(spans_between_pipes))]
-    spans_between_pipes = list(itertools.compress(spans_between_pipes, are_children))
+    spans_between_pipes = [(t1[1], t2[0])
+                           for t1, t2 in zip(spans[:-1], spans[1:])]
+    are_children = [
+        True if i %
+        n_children != (
+            n_children -
+            1) else False for i in range(
+            len(spans_between_pipes))]
+    spans_between_pipes = list(
+        itertools.compress(
+            spans_between_pipes,
+            are_children))
 
     for i, (start, end) in enumerate(spans_between_pipes):
         line = line[:start] + "_" * (end - start) + line[end:]
@@ -70,7 +80,8 @@ def create_next_generation_numbers(line, next_line):
         number_length = len(char_number)
         span_length = end - start
         l_box = (span_length - number_length) // 2
-        numbers = numbers[:start] + " " * l_box + char_number + " " * l_box + numbers[end:]
+        numbers = numbers[:start] + " " * l_box + \
+            char_number + " " * l_box + numbers[end:]
     return numbers
 
 

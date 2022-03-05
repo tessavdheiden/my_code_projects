@@ -18,6 +18,7 @@ class Node:
     def pprint(self, index: bool = False, delimiter: str = "-") -> None:
         lines = _build_tree_string(self, 0, index, delimiter)[0]
         print("\n" + "\n".join((line.rstrip() for line in lines)))
+
     @property
     def leaves(self) -> List["Node"]:
         current_nodes = [self]
@@ -120,4 +121,3 @@ def _build_tree_string(
 
     # Return the new box, its width and its root repr positions
     return new_box, len(new_box[0]), new_root_start, new_root_end
-

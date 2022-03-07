@@ -38,3 +38,19 @@ Useful trick to reformat:
 ```
 autopep8 --in-place --aggressive --aggressive create_general_tree.py
 ```
+
+Git commands for branching:
+```
+git checkout -b 'develop'
+git add name_of_file_to_move_to_github second_file_to_move_to_github
+git commit -m 'added new files'
+git push --set -upstream origin develop
+```
+
+Once file is merged:
+```
+git checkout main
+git pull
+git branch -d develop
+git branch
+```
